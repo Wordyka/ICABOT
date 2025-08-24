@@ -1,0 +1,15 @@
+{
+  "name": "aibot",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/chat.js",
+  "scripts": {
+    "ingest": "node src/ingest.js",
+    "chat": "node src/chat.js"
+  },
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.15.1",
+    "dotenv": "^16.4.5",
+    "ollama": "^0.5.17"
+  }
+}

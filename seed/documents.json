@@ -1,0 +1,24 @@
+[
+  {
+    "id": "alert-001",
+    "app_name": "LIVIN DILI",
+    "location": "Plaza Mandiri",
+    "endpoint": "/loan-service/loan/v1/accounts",
+    "type": "Avg. Response Time",
+    "value": "6.72s",
+    "status": "Failed to create",
+    "source": "Appdy",
+    "text": "Alert di aplikasi LIVIN DILI endpoint /loan-service/loan/v1/accounts dengan rata-rata response time 6.72s. Sumber Appdy dengan status Failed to create."
+  },
+  {
+    "id": "alert-002",
+    "app_name": "Kopra",
+    "location": "Plaza Mandiri",
+    "endpoint": "login",
+    "type": "Error Rate",
+    "value": "3.2%",
+    "status": "Resolved",
+    "source": "Appdy",
+    "text": "Alert di aplikasi Kopra login dengan error rate 3.2%. Sumber Appdy dengan status Resolved."
+  }
+]
