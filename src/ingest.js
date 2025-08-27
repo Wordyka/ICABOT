@@ -5,7 +5,8 @@ import { qdrant, embedText } from './clients.js';
 
 const COLLECTION = process.env.COLLECTION || 'kb_local';
 const VECTOR_SIZE = 768; // nomic-embed-text = 768 dimensi
-const DISTANCE = 'Cosine'; // ideal untuk text embeddings
+//const VECTOR_SIZE = 1024; // snowflake-arctic-embed = 1024 dimensi
+const DISTANCE = 'Cosine';
 
 function chunkText(text, maxChars = 800) {
   const paragraphs = text.split(/\n{2,}/g);
@@ -44,27 +45,35 @@ async function main() {
   const docs = JSON.parse(raw);
 
   const points = [];
-  for (const doc of docs) {
-    const chunks = chunkText(doc.text, 900);
-    for (let i = 0; i < chunks.length; i++) {
-      const text = chunks[i];
-      const vector = await embedText(text, 'document');
-      points.push({
-        id: randomUUID(),
-        vector,
-        payload: {
-          doc_id: doc.id,
-          title: doc.title,
-          url: doc.url,
-          tags: doc.tags,
-          chunk_index: i,
-          text
-        }
-      });
-    }
-  }
+for (const doc of docs) {
+  const text = `
+  Tanggal: ${doc.tanggal}
+  Aplikasi: ${doc.app}
+  Issue: ${doc.issue}
+  Penyebab: ${doc.cause}
+  Solusi: ${doc.solution}
+  `;
 
-  // Upsert batch
+  const chunks = chunkText(text, 900);
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    const vector = await embedText(chunk, 'document');
+    points.push({
+      id: randomUUID(),
+      vector,
+      payload: {
+        tanggal: doc.tanggal,
+        app: doc.app,
+        issue: doc.issue,
+        cause: doc.cause,
+        solution: doc.solution,
+        chunk_index: i,
+        text: chunk
+      }
+    });
+  }
+}
+
   console.log(`Mengirim ${points.length} chunk ke Qdrant ...`);
   await qdrant.upsert(COLLECTION, { points });
   console.log('Selesai ingest.');
