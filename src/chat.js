@@ -1,13 +1,13 @@
 import 'dotenv/config';
 import readline from 'node:readline';
-import { qdrant, embedText, chatWithOllama } from './clients after local llm.js';
+import { qdrant, embedText, chatWithOllama } from './clients.js';
 
 const COLLECTION = process.env.COLLECTION || 'kb_local';
 const TOP_K = Number(process.env.TOP_K || 3);
 let chatHistory = [
   {
     role: 'system',
-    content: `Kamu adalah asisten yang hanya boleh menjawab berdasarkan konteks.
+    content: `Kamu adalah asisten yang hanya boleh menjawab berdasarkan konteks. Jawab dengan detail (maks 8-10 baris), gunakan bullet bila perlu
 - Jika tidak ada jawaban di konteks, katakan: "Tidak ada di basis pengetahuan".
 - Jangan menambahkan informasi lain di luar konteks.`
   }

@@ -1,10 +1,9 @@
-# RAG-JS (Retrieval Augmented Generation dengan Ollama + Qdrant)
+# ICABOT RAG-JS (Retrieval Augmented Generation dengan Ollama + Qdrant)
 
 Proyek sederhana untuk membangun **RAG (Retrieval Augmented Generation)** menggunakan **JavaScript**, dengan integrasi:
 
 - [Ollama](https://ollama.com/) → LLM & Embeddings (model: `llama3.2` + `nomic-embed-text`)  
 - [Qdrant](https://qdrant.tech/) → Vector Database untuk menyimpan dan mencari dokumen  
-- **Docker Compose** → menjalankan Ollama & Qdrant secara lokal
 
 ---
 
@@ -28,13 +27,17 @@ rag-js/
 
 ## 🚀 Persiapan
 
-### 1. Jalankan Docker
+### 1. Start server Qdrant dan Ollama
 ```bash
-docker compose up -d
 
-# Tarik model Ollama
-docker exec -it ollama ollama pull llama3.2
-docker exec -it ollama ollama pull nomic-embed-text
+# pull dan jalankan model Ollama
+ollama pull llama3.2:1b
+
+ollama serve
+
+# extract dan run qdrant file 
+
+run qdrant.exe
 ````
 
 ### 2. Install dependencies
@@ -46,12 +49,14 @@ npm install
 ### 3. Konfigurasi `.env`
 
 ```env
-QDRANT_URL=http://localhost:6333
+QDRANT_URL=http://127.0.0.1:6333
 OLLAMA_HOST=http://localhost:11434
 COLLECTION=kb_local
 EMBED_MODEL=nomic-embed-text
-GENERATE_MODEL=llama3.2
+GENERATE_MODEL=llama3.2:3b
 TOP_K=5
+MAX_TOKENS=512
+TEMPERATURE=0.7
 ```
 
 ---

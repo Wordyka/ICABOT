@@ -48,10 +48,10 @@ async function main() {
 for (const doc of docs) {
   const text = `
   Tanggal: ${doc.tanggal}
-  Aplikasi: ${doc.app}
-  Issue: ${doc.issue}
-  Penyebab: ${doc.cause}
-  Solusi: ${doc.solution}
+  Aplikasi: ${doc.app_name}
+  Issue: ${doc.text}
+  Status: ${doc.status}
+  Endpoint: ${doc.endpoint}
   `;
 
   const chunks = chunkText(text, 900);

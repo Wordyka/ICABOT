@@ -8,7 +8,8 @@
     "value": "6.72s",
     "status": "Failed to create",
     "source": "Appdy",
-    "text": "Alert di aplikasi LIVIN DILI endpoint /loan-service/loan/v1/accounts dengan rata-rata response time 6.72s. Sumber Appdy dengan status Failed to create."
+    "text": "Alert di aplikasi LIVIN DILI endpoint /loan-service/loan/v1/accounts dengan rata-rata response time 6.72s. Sumber Appdy dengan status Failed to create.",
+    "tanggal": "01-02-2025"
   },
   {
     "id": "alert-002",
@@ -19,6 +20,103 @@
     "value": "3.2%",
     "status": "Resolved",
     "source": "Appdy",
-    "text": "Alert di aplikasi Kopra login dengan error rate 3.2%. Sumber Appdy dengan status Resolved."
+    "text": "Alert di aplikasi Kopra login dengan error rate 3.2%. Sumber Appdy dengan status Resolved.",
+    "tanggal": "01-04-2025"
+  },
+  {
+    "id": "alert-003",
+    "app_name": "LIVIN DILI",
+    "location": "Plaza Indonesia",
+    "endpoint": "/payment-service/pay",
+    "type": "Avg. Response Time",
+    "value": "5.89s",
+    "status": "Failed to create",
+    "source": "Appdy",
+    "text": "Alert di aplikasi LIVIN DILI endpoint /payment-service/pay dengan rata-rata response time 5.89s. Sumber Appdy dengan status Failed to create.",
+    "tanggal": "02-02-2025"
+  },
+  {
+    "id": "alert-004",
+    "app_name": "Kopra",
+    "location": "Plaza Indonesia",
+    "endpoint": "/register",
+    "type": "Error Rate",
+    "value": "4.1%",
+    "status": "Resolved",
+    "source": "Appdy",
+    "text": "Alert di aplikasi Kopra /register dengan error rate 4.1%. Sumber Appdy dengan status Resolved.",
+    "tanggal": "03-02-2025"
+  },
+  {
+    "id": "alert-005",
+    "app_name": "FinApp",
+    "location": "Grand Indonesia",
+    "endpoint": "/transaction/list",
+    "type": "Avg. Response Time",
+    "value": "7.03s",
+    "status": "Failed to create",
+    "source": "Appdy",
+    "text": "Alert di aplikasi FinApp endpoint /transaction/list dengan rata-rata response time 7.03s. Sumber Appdy dengan status Failed to create.",
+    "tanggal": "04-02-2025"
+  },
+  {
+    "id": "alert-006",
+    "app_name": "FinApp",
+    "location": "Grand Indonesia",
+    "endpoint": "/login",
+    "type": "Error Rate",
+    "value": "2.8%",
+    "status": "Resolved",
+    "source": "Appdy",
+    "text": "Alert di aplikasi FinApp login dengan error rate 2.8%. Sumber Appdy dengan status Resolved.",
+    "tanggal": "05-02-2025"
+  },
+  {
+    "id": "alert-007",
+    "app_name": "PayNow",
+    "location": "Plaza Senayan",
+    "endpoint": "/checkout",
+    "type": "Avg. Response Time",
+    "value": "6.45s",
+    "status": "Failed to create",
+    "source": "Appdy",
+    "text": "Alert di aplikasi PayNow endpoint /checkout dengan rata-rata response time 6.45s. Sumber Appdy dengan status Failed to create.",
+    "tanggal": "06-02-2025"
+  },
+  {
+    "id": "alert-008",
+    "app_name": "PayNow",
+    "location": "Plaza Senayan",
+    "endpoint": "/payment",
+    "type": "Error Rate",
+    "value": "3.5%",
+    "status": "Resolved",
+    "source": "Appdy",
+    "text": "Alert di aplikasi PayNow /payment dengan error rate 3.5%. Sumber Appdy dengan status Resolved.",
+    "tanggal": "07-02-2025"
+  },
+  {
+    "id": "alert-009",
+    "app_name": "BankPro",
+    "location": "Citywalk",
+    "endpoint": "/accounts/details",
+    "type": "Avg. Response Time",
+    "value": "5.95s",
+    "status": "Failed to create",
+    "source": "Appdy",
+    "text": "Alert di aplikasi BankPro endpoint /accounts/details dengan rata-rata response time 5.95s. Sumber Appdy dengan status Failed to create.",
+    "tanggal": "08-02-2025"
+  },
+  {
+    "id": "alert-010",
+    "app_name": "BankPro",
+    "location": "Citywalk",
+    "endpoint": "/fund-transfer",
+    "type": "Error Rate",
+    "value": "4.0%",
+    "status": "Resolved",
+    "source": "Appdy",
+    "text": "Alert di aplikasi BankPro /fund-transfer dengan error rate 4.0%. Sumber Appdy dengan status Resolved.",
+    "tanggal": "09-02-2025"
   }
 ]
