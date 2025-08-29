@@ -2,14 +2,12 @@ import 'dotenv/config';
 import fs from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { qdrant, embedText } from './clients.js';
+import * as XLSX from 'xlsx';
+//npm install xlsx
 
 const COLLECTION = process.env.COLLECTION || 'kb_local';
-const VECTOR_SIZE = 768; // nomic-embed-text = 768 dimensi
-//const VECTOR_SIZE = 1024; // snowflake-arctic-embed = 1024 dimensi
+const VECTOR_SIZE = 768; 
 const DISTANCE = 'Cosine';
-
-const ts = new Date(doc.tanggal.split(" ")[0].split("/").reverse().join("-")).getTime();
-
 
 function chunkText(text, maxChars = 800) {
   const paragraphs = text.split(/\n{2,}/g);
@@ -29,7 +27,6 @@ function chunkText(text, maxChars = 800) {
 
 async function ensureCollection() {
   try {
-    // cek koleksi; jika tidak ada, create
     await qdrant.getCollection(COLLECTION);
     console.log(`Collection "${COLLECTION}" sudah ada.`);
   } catch {
@@ -43,43 +40,34 @@ async function ensureCollection() {
 
 async function main() {
   await ensureCollection();
-
-  const raw = await fs.readFile(new URL('../seed/documents.json', import.meta.url), 'utf-8');
-  const docs = JSON.parse(raw);
-
+  const buffer = await fs.readFile(new URL('../seed/POTENSI-INCIDENT-2025_POTENSI-INCIDENT-2025_.xlsx', import.meta.url));
+  const workbook = XLSX.read(buffer, { type: 'buffer' });
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  const docs = XLSX.utils.sheet_to_json(sheet); 
   const points = [];
-for (const doc of docs) {
-  const text = `
-  Tanggal: ${doc.tanggal}
-  Aplikasi: ${doc.app}
-  Issue: ${doc.issue}
-  Penyebab: ${doc.cause}
-  Solusi: ${doc.solution}
-  `;
 
-  const chunks = chunkText(text, 900);
-  for (let i = 0; i < chunks.length; i++) {
-    const chunk = chunks[i];
-    const vector = await embedText(chunk, 'document');
-    points.push({
-      id: randomUUID(),
-      vector,
-      payload: {
-        tanggal: doc.tanggal,
-        app: doc.app,
-        issue: doc.issue,
-        cause: doc.cause,
-        solution: doc.solution,
-        timestamp: ts,
-        text: chunk
-      }
-    });
+  for (const doc of docs) {
+    const text = Object.entries(doc)
+      .map(([key, val]) => `${key}: ${val}`)
+      .join('\n');
+
+    const chunks = chunkText(text, 900);
+    for (let i = 0; i < chunks.length; i++) {
+      const chunk = chunks[i];
+      const vector = await embedText(chunk, 'document');
+      points.push({
+        vector,
+        payload: {
+          ...doc,  
+          text: chunk
+        }
+      });
+    }
   }
-}
 
   console.log(`Mengirim ${points.length} chunk ke Qdrant ...`);
   await qdrant.upsert(COLLECTION, { points });
-  console.log('Selesai ingest.');
+  console.log('Selesai ingest Excel');
 }
 
 main().catch(err => {
